@@ -47,10 +47,14 @@ def web_list_exec():
 
 
 def unzip_ext(extpath='', extid=''):
-    extpath = os.path.realpath(extpath)
-    zip_ref = zipfile.ZipFile(extpath, 'r')
-    zip_ref.extractall(os.path.join(os.path.dirname(extpath), extid))
-    zip_ref.close()
+    try:
+        extpath = os.path.realpath(extpath)
+        zip_ref = zipfile.ZipFile(extpath, 'r')
+        zip_ref.extractall(os.path.join(os.path.dirname(extpath), extid))
+        zip_ref.close()
+    except UnicodeEncodeError as e:
+        print(str(e))
+        print('[!] UnicodeEncodeError in id:{}'.format(str(extid)))
 
 
 def manifestfile_to_weblist(file=''):
