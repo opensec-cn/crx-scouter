@@ -22,7 +22,7 @@ def download_ext(extid='', filepath=''):
             allow_redirects=True, timeout=10, headers=conf['HTTP_HEADERS'])
     if res.status_code != 200:
         raise requests.RequestException(u"Status code error: {}".format(res.status_code))
-    with io.open(filepath, 'wb', encoding='utf-8') as f:
+    with io.open(filepath, 'wb') as f:
         for chunk in res.iter_content(chunk_size=512 * 1024): 
             if chunk: 
                 f.write(chunk)
