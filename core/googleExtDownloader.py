@@ -50,7 +50,7 @@ def unzip_ext(extpath='', extid=''):
     try:
         extpath = os.path.realpath(extpath)
         zip_ref = zipfile.ZipFile(extpath, 'r')
-        zip_ref.extractall(os.path.join(os.path.dirname(extpath), extid))
+        zip_ref.extract('manifest.json', os.path.join(os.path.dirname(extpath), extid))
         zip_ref.close()
     except UnicodeEncodeError as e:
         print(str(e))
