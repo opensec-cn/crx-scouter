@@ -4,6 +4,7 @@ import time
 import shutil
 import requests
 import zipfile
+import io
 from lib.common import dict2file
 from lib.threadManager import ThreadPool
 from config import conf
@@ -21,7 +22,7 @@ def download_ext(extid='', filepath=''):
             allow_redirects=True, timeout=10, headers=conf['HTTP_HEADERS'])
     if res.status_code != 200:
         raise requests.RequestException(u"Status code error: {}".format(res.status_code))
-    with open(filepath, 'wb') as f:
+    with io.open(filepath, 'wb', encoding='utf-8') as f:
         for chunk in res.iter_content(chunk_size=512 * 1024): 
             if chunk: 
                 f.write(chunk)
@@ -33,7 +34,7 @@ def web_list_exec():
     count = 0
     pool = ThreadPool(conf['threadnum'])
     # import pdb;pdb.set_trace()
-    with open(conf['data_file'], 'r') as f:
+    with io.open(conf['data_file'], 'r', encoding='utf-8') as f:
         for count, line in enumerate(f):
             info = json.loads(line.strip())
             pool.add_task(ext_info_add_list, extinfo=info)
@@ -53,7 +54,7 @@ def unzip_ext(extpath='', extid=''):
 
 
 def manifestfile_to_weblist(file=''):
-    with open(file, 'r') as f:
+    with io.open(file, 'r', encoding='utf-8') as f:
         info = json.load(f)
         web_list = info.get('web_accessible_resources')
         return web_list
