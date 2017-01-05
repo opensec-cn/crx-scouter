@@ -69,7 +69,7 @@ def ext_info_add_list(extinfo = {}):
         filepath = os.path.join(path, extid + '.crx')
         flag = download_ext(extid, filepath)
         if flag:
-            unzip_ext(extpath=filepath, extid=extid)
+            unzip_ext(extpath=filepath, extid=str(extid))
             manifest_file = os.path.join(path, extid, 'manifest.json')
             web_list = manifestfile_to_weblist(manifest_file)
             try:
