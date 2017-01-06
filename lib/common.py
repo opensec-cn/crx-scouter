@@ -23,7 +23,10 @@ def do_ten_times_til_true(func):
     def _do_ten_times_til_true(*args, **kwargs):
         ret = False
         for i in range(10):
-            ret = func(*args, **kwargs)
+            try:
+                ret = func(*args, **kwargs)
+            except Exception as e:
+                ret = False
             if ret:
                 break
         return ret
