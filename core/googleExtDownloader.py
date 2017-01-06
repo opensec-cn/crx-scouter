@@ -50,16 +50,16 @@ def web_list_exec():
 
 def wildcard_char_done(etxfile='', weblist=[]):
     wildcard_filename_list = is_wildcard_char(weblist)
+    zipf = zipfile.ZipFile(etxfile, 'r')
+    filenamelist = zipf.namelist()
+    zipf.close()
     if wildcard_filename_list:
         for wildcard_filename in wildcard_filename_list:
-            wildcard_filename = wildcard_filename.rstrip('/')
+            wildcard_filename = wildcard_filename.lstrip('/')
             if wildcard_filename != "*":
-               zipf = zipfile.ZipFile(etxfile, 'r')
-               filenamelist = zipf.namelist()
-               zipf.close()
                for name in filenamelist:
-                    name = name.rstrip('/')
-                   if not name.endswith('/') and fnmatch.fnmatch(name, wildcard_filename):
+                    name = name.lstrip('/')
+                    if not name.endswith('/') and fnmatch.fnmatch(name, wildcard_filename):
                        return [name]
     return weblist
 
