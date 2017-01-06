@@ -49,21 +49,23 @@ def web_list_exec():
 
 
 def wildcard_char_done(etxfile='', weblist=[]):
-    wildcard_filename = is_wildcard_char(weblist)
-    if wildcard_filename and wildcard_filename != "*":
-        zipf = zipfile.ZipFile(etxfile, 'r')
-        filenamelist = zipf.namelist()
-        zipf.close()
-        for name in filenamelist:
-            if not name.endswith('/') and fnmatch.fnmatch(name, wildcard_filename):
-                return [name]
+    wildcard_filename_list = is_wildcard_char(weblist)
+    if wildcard_filename_list:
+        for wildcard_filename in wildcard_filename_list:
+            if wildcard_filename != "*":
+               zipf = zipfile.ZipFile(etxfile, 'r')
+               filenamelist = zipf.namelist()
+               zipf.close()
+               for name in filenamelist:
+                   if not name.endswith('/') and fnmatch.fnmatch(name, wildcard_filename):
+                       return [name]
     return weblist
 
 
 def is_wildcard_char(weblist=[]):
     for webfile in weblist:
         if '*' in webfile:
-            return webfile
+            return weblist
 
 
 def unzip_ext(extpath='', extid=''):
