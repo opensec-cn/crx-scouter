@@ -4,6 +4,8 @@ import time
 import shutil
 import requests
 import zipfile
+import codecs
+import fnmatch
 import io
 from config import conf
 from lib.common import dict2file
@@ -46,6 +48,24 @@ def web_list_exec():
             dict2file(result, conf['etx_info_weblist_file'])
 
 
+def wildcard_char_done(etxfile='', weblist=[]):
+    wildcard_filename = is_wildcard_char(weblist)
+    if wildcard_filename and wildcard_filename != "*":
+        zipf = zipfile.ZipFile(etxfile, 'r')
+        filenamelist = zipf.namelist()
+        zipf.close()
+        for name in filenamelist:
+            if not name.endswith('/') and fnmatch.fnmatch(name, wildcard_filename):
+                return [name]
+    return weblist
+
+
+def is_wildcard_char(weblist=[]):
+    for webfile in weblist:
+        if '*' in webfile:
+            return webfile
+
+
 def unzip_ext(extpath='', extid=''):
     try:
         extpath = os.path.realpath(extpath)
@@ -58,10 +78,14 @@ def unzip_ext(extpath='', extid=''):
 
 
 def manifestfile_to_weblist(file=''):
-    with io.open(file, 'r', encoding='utf-8') as f:
-        info = json.load(lstrip_bom(f))
-        web_list = info.get('web_accessible_resources')
-        return web_list
+    with codecs.open(file, 'r', encoding='utf-8-sig') as f:
+        try:
+            info = json.loads(f.read())
+            web_list = info.get('web_accessible_resources')
+            return web_list
+        except ValueError as e:
+            print(str(e))
+            print('[!] ValueError when manifestfile_to_weblist in :{}'.format(file))
 
 
 def ext_info_add_list(extinfo = {}):
@@ -75,6 +99,8 @@ def ext_info_add_list(extinfo = {}):
             unzip_ext(extpath=filepath, extid=str(extid))
             manifest_file = os.path.join(path, extid, 'manifest.json')
             web_list = manifestfile_to_weblist(manifest_file)
+            if web_list:
+                web_list = wildcard_char_done(etxfile=filepath, weblist=web_list)
             try:
                 os.remove(filepath)
                 # shutil.rmtree(os.path.join(path, extid))
