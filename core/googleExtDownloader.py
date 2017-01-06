@@ -5,11 +5,11 @@ import shutil
 import requests
 import zipfile
 import io
+from config import conf
 from lib.common import dict2file
 from lib.threadManager import ThreadPool
-from config import conf
 from lib.common import Error
-from lib.common import do_ten_times_til_true
+from lib.common import do_ten_times_til_true, lstrip_bom
 
 ext_download_url_base = 'https://clients2.google.com/service/update2/crx?' \
     + 'response=redirect&prodversion=49.0&x=id%3D{id}%26installsource%3Dondemand%26uc'
@@ -59,7 +59,7 @@ def unzip_ext(extpath='', extid=''):
 
 def manifestfile_to_weblist(file=''):
     with io.open(file, 'r', encoding='utf-8') as f:
-        info = json.load(f)
+        info = json.load(lstrip_bom(f))
         web_list = info.get('web_accessible_resources')
         return web_list
 
@@ -67,7 +67,6 @@ def manifestfile_to_weblist(file=''):
 def ext_info_add_list(extinfo = {}):
     extid = extinfo.get('id')
     print('[*] id : ' + extid)
-    # import pdb;pdb.set_trace()
     path = conf['tmp_path']
     if extid:
         filepath = os.path.join(path, extid + '.crx')
@@ -78,7 +77,7 @@ def ext_info_add_list(extinfo = {}):
             web_list = manifestfile_to_weblist(manifest_file)
             try:
                 os.remove(filepath)
-                shutil.rmtree(os.path.join(path, extid))
+                # shutil.rmtree(os.path.join(path, extid))
             except FileNotFoundError as e:
                 print(str(e))
             if web_list:

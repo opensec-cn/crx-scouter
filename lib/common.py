@@ -1,6 +1,7 @@
 import locale
 import json
 import io
+from codecs import BOM_UTF8
 from collections import OrderedDict
 
 def get_int(stri = ''):
@@ -18,7 +19,6 @@ def dict2file(dic = {}, path=''):
 class Error(Exception):
     pass
 
-
 def do_ten_times_til_true(func):
     def _do_ten_times_til_true(*args, **kwargs):
         ret = False
@@ -28,3 +28,9 @@ def do_ten_times_til_true(func):
                 break
         return ret
     return _do_ten_times_til_true
+
+def lstrip_bom(str_, bom=BOM_UTF8):
+    if str_.startswith(bom):
+        return str_[len(bom):]
+    else:
+        return str_
