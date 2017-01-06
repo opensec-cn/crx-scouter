@@ -15,7 +15,6 @@ class chromeStoreSpider(object):
         self.start = 1
         self.category_list = [
             'ext/10-blogging',
-            # 'ext/15-by-google',
             'ext/12-shopping',
             'ext/11-web-development',
             'ext/1-communication',
@@ -83,6 +82,19 @@ class chromeStoreSpider(object):
                     return res
             except requests.RequestException as e:
                 pass
+
+    def get_ext_by_google(self):
+        url = "https://chrome.google.com/webstore/ajax/item?pv=20161108&count=209&category=ext/15-by-google"
+        res = self.get_ext_item_reps(url)
+        jsonlist = json.loads(res.lstrip(")]}'\n"))
+        jsonlist = jsonlist[1][1]
+        if jsonlist:
+            for json_ in jsonlist:
+                id_str, users, info = self._list2info(json_)
+                if users >= conf['more_then_user_num']:
+                    print('[*] id : %s'%id_str)
+                    import pdb;pdb.set_trace()
+                    dict2file(info, path=self.json_path)
 
     def _res_to_info_list(self, res=''):
         if res:
