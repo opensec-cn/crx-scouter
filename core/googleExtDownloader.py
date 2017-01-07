@@ -1,12 +1,12 @@
 import os
+import io
 import json
-import time
 import shutil
 import requests
 import zipfile
 import codecs
 import fnmatch
-import io
+from time import strftime, gmtime
 from config import conf
 from lib.common import dict2file
 from lib.threadManager import ThreadPool
@@ -35,14 +35,19 @@ def web_list_exec():
     print('[*] -- web list exec ---')
     count = 0
     pool = ThreadPool(conf['threadnum'])
-    # import pdb;pdb.set_trace()
     with io.open(conf['data_file'], 'r', encoding='utf-8') as f:
         for count, line in enumerate(f):
             info = json.loads(line.strip())
             pool.add_task(ext_info_add_list, extinfo=info)
+    print('[-] all task add to threads queue : {}'.format(
+        strftime("%Y-%m-%d %H:%M:%S", gmtime())))
     pool.destroy()
+    print('[-] thread pool has been destroy: {}'.format(
+        strftime("%Y-%m-%d %H:%M:%S", gmtime())))
     count = count + 1
     for i in range(count):
+        print('[-] count:{},get task in : {}'.format(
+            count, strftime("%Y-%m-%d %H:%M:%S", gmtime())))
         result = pool.get_task()
         if result:
             dict2file(result, conf['etx_info_weblist_file'])
