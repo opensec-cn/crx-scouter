@@ -33,7 +33,6 @@ def download_ext(extid='', filepath=''):
 
 def web_list_exec():
     print('[*] -- web list exec ---')
-    count = 0
     pool = ThreadPool(conf['threadnum'])
     with io.open(conf['data_file'], 'r', encoding='utf-8') as f:
         for count, line in enumerate(f):
@@ -44,13 +43,15 @@ def web_list_exec():
     pool.destroy()
     print('[-] thread pool has been destroy: {}'.format(
         strftime("%Y-%m-%d %H:%M:%S", gmtime())))
-    count = count + 1
-    for i in range(count):
-        print('[-] count:{},get task in : {}'.format(
-            count, strftime("%Y-%m-%d %H:%M:%S", gmtime())))
+    num = 0
+    while not pool.out_queue.empty():
+        num = num + 1
+        print('[-] NO.{},get task in : {}'.format(
+            num, strftime("%Y-%m-%d %H:%M:%S", gmtime())))
         result = pool.get_task()
         if result:
             dict2file(result, conf['etx_info_weblist_file'])
+        
 
 
 def wildcard_char_done(etxfile='', weblist=[]):
@@ -117,4 +118,6 @@ def ext_info_add_list(extinfo = {}):
                 print(str(e))
             if web_list:
                 extinfo['web_accessible_resources'] = web_list
+                print('[*] ID : {} has done, time is : {}'.format(
+                    extid, strftime("%Y-%m-%d %H:%M:%S", gmtime())))
                 return extinfo

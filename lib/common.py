@@ -27,6 +27,7 @@ def do_ten_times_til_true(func):
                 ret = func(*args, **kwargs)
             except Exception as e:
                 ret = False
+                print(str(e))
             if ret:
                 break
         return ret
