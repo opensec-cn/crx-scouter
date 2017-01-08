@@ -1,11 +1,10 @@
-import requests
-# from exceptions import Exception
 import json
+import requests
 from config import conf
-from lib.common import get_int, dict2file
+from lib.common import get_int, dict2file, do_ten_times_til_true
 
 class chromeStoreSpider(object):
-    """"""
+    """获取Chrome WebStore中所有的拓展信息"""
 
     ext_item_url = '''https://chrome.google.com/webstore/ajax/item?hl=zh-CN&gl=CN&pv=20161108&mce=atf%2Ceed%2Cpii%2Crtr%2Crlb%2Cgtc%2Chcn%2Csvp%2Cwtd%2Cc3d%2Cncr%2Cctm%2Cac%2Chot%2Ceuf%2Cmac%2Cfcf%2Crma%2Cpot%2Cevt%2Cigb&requestedCounts=infiniteWall%3A{limit}%3A0%3Afalse&token=featured%3A0%4010316222%3A7%3Afalse%2Cmcol%23top_picks_productivity%3A0%4010316223%3A11%3Atrue%2CinfiniteWall%3A0%4010316253%3A{start}%3Afalse&category={category}&_reqid=3058318&rt=j'''
 
@@ -65,23 +64,22 @@ class chromeStoreSpider(object):
                 return (id_str, users, info)
             except IndexError as e:
                 # raise e
-                import pdb;pdb.set_trace()
+                # import pdb;pdb.set_trace()
                 pass
 
-
+    @do_ten_times_til_true
     def get_ext_item_reps(self, url):
         # 尝试请求十次防止请求失败，数据丢失。
-        for time in range(0, 10):
-            try:
-                response = requests.post(url, verify=False,\
-                        allow_redirects=False, timeout=10, headers=conf['HTTP_HEADERS'])
-                res = response.text
-                if response.status_code != 200:
-                    raise requests.RequestException(u"Status code error: {}".format(response.status_code))
-                if response.status_code == 200:
-                    return res
-            except requests.RequestException as e:
-                pass
+        try:
+            response = requests.post(url, verify=False,\
+                    allow_redirects=False, timeout=10, headers=conf['HTTP_HEADERS'])
+            res = response.text
+            if response.status_code != 200:
+                raise requests.RequestException(u"Status code error: {}".format(response.status_code))
+            if response.status_code == 200:
+                return res
+        except requests.RequestException as e:
+            return False
 
     def get_ext_by_google(self):
         url = "https://chrome.google.com/webstore/ajax/item?pv=20161108&count=209&category=ext/15-by-google"
@@ -93,7 +91,6 @@ class chromeStoreSpider(object):
                 id_str, users, info = self._list2info(json_)
                 if users >= conf['more_then_user_num']:
                     print('[*] id : %s'%id_str)
-                    import pdb;pdb.set_trace()
                     dict2file(info, path=self.json_path)
 
     def _res_to_info_list(self, res=''):
@@ -101,7 +98,7 @@ class chromeStoreSpider(object):
             infojson = json.loads(res.lstrip(")]}'\n"))
             return infojson[0][1][1]
         else: 
-            import pdb;pdb.set_trace()
+            # import pdb;pdb.set_trace()
             # raise Exception() 
             pass
 

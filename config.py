@@ -9,15 +9,21 @@ conf = {}
 
 conf['data_file'] = './data/data2_1000.json'
 
-conf['etx_info_weblist_file'] = './data/etx_info_weblist_file_1000plus_2.json'
+conf['etx_info_weblist_file'] = './data/test2.json'
 
-conf['more_then_user_num'] = 0
+conf['more_then_user_num'] = 1000
 
 conf['tmp_ext_file'] = './tmp/ext.crx'
 
 conf['tmp_path'] = './tmp/'
 
-conf['threadnum'] = 20
+conf['threadnum'] = 1
+
+conf['del_tmp'] = True
+
+conf['weblist'] = False
+
+conf['filelist'] = True
 
 conf['HTTP_HEADERS'] = {
     "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_5) "

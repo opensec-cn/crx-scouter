@@ -11,7 +11,7 @@ from config import conf
 from lib.common import dict2file
 from lib.threadManager import ThreadPool
 from lib.common import Error
-from lib.common import do_ten_times_til_true, lstrip_bom
+from lib.common import do_ten_times_til_true, lstrip_bom, zip2filelist
 
 ext_download_url_base = 'https://clients2.google.com/service/update2/crx?' \
     + 'response=redirect&prodversion=49.0&x=id%3D{id}%26installsource%3Dondemand%26uc'
@@ -51,14 +51,11 @@ def web_list_exec():
         result = pool.get_task()
         if result:
             dict2file(result, conf['etx_info_weblist_file'])
-        
 
 
 def wildcard_char_done(etxfile='', weblist=[]):
     wildcard_filename_list = is_wildcard_char(weblist)
-    zipf = zipfile.ZipFile(etxfile, 'r')
-    filenamelist = zipf.namelist()
-    zipf.close()
+    filenamelist = zip2filelist(etxfile)
     if wildcard_filename_list:
         for wildcard_filename in wildcard_filename_list:
             wildcard_filename = wildcard_filename.lstrip('/')
@@ -105,15 +102,16 @@ def ext_info_add_list(extinfo = {}):
     if extid:
         filepath = os.path.join(path, extid + '.crx')
         flag = download_ext(extid, filepath)
-        if flag:
+        if flag and conf['weblist']:
             unzip_ext(extpath=filepath, extid=str(extid))
             manifest_file = os.path.join(path, extid, 'manifest.json')
             web_list = manifestfile_to_weblist(manifest_file)
             if web_list:
                 web_list = wildcard_char_done(etxfile=filepath, weblist=web_list)
             try:
-                os.remove(filepath)
-                # shutil.rmtree(os.path.join(path, extid))
+                if conf['del_tmp']:
+                    os.remove(filepath)
+                shutil.rmtree(os.path.join(path, extid))
             except FileNotFoundError as e:
                 print(str(e))
             if web_list:
@@ -121,3 +119,9 @@ def ext_info_add_list(extinfo = {}):
                 print('[*] ID : {} has done, time is : {}'.format(
                     extid, strftime("%Y-%m-%d %H:%M:%S", gmtime())))
                 return extinfo
+        if flag and conf['filelist']:
+            filelist = zip2filelist(os.path.realpath(filepath))
+            extinfo['filelist'] = filelist
+            print('[*] ID : {} has done, time is : {}'.format(
+                    extid, strftime("%Y-%m-%d %H:%M:%S", gmtime())))
+            return extinfo

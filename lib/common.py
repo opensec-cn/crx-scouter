@@ -1,6 +1,7 @@
 import locale
 import json
 import io
+import zipfile
 from codecs import BOM_UTF8
 from collections import OrderedDict
 
@@ -18,6 +19,12 @@ def dict2file(dic = {}, path=''):
 
 class Error(Exception):
     pass
+
+def zip2filelist(filepath=''):
+    zipf = zipfile.ZipFile(filepath, 'r')
+    filenamelist = zipf.namelist()
+    zipf.close()
+    return filenamelist
 
 def do_ten_times_til_true(func):
     def _do_ten_times_til_true(*args, **kwargs):
