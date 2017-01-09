@@ -10,7 +10,7 @@ from time import strftime, gmtime
 from config import conf
 from lib.common import dict2file
 from lib.threadManager import ThreadPool
-from lib.common import Error
+from lib.common import Error, get_int
 from lib.common import do_ten_times_til_true, lstrip_bom, zip2filelist
 
 ext_download_url_base = 'https://clients2.google.com/service/update2/crx?' \
@@ -104,6 +104,8 @@ def del_tmp_file(filepath, path, extid):
 
 def ext_info_add_list(extinfo = {}):
     extid = extinfo.get('id')
+    if get_int(extinfo.get('users')) < conf['more_then_user_num']:
+        return False
     print('[*] id : ' + extid)
     path = conf['tmp_path']
     if extid:

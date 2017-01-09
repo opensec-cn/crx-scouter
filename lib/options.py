@@ -28,7 +28,7 @@ def etxinfo(ctx, outfile, users):
     csspider.run()
 
 
-@option_init.command('EtxDownload',
+@option_init.command('etxDownload',
         help='This commond will Download Chrome Etx .crx file')
 @click.pass_context
 @click.option('-O', '--outfile', type=str,
@@ -42,10 +42,25 @@ def etxinfo(ctx, outfile, users):
 @click.option('-d', '--deltmp', is_flag=True, 
         help='del the dowload config.py:conf["del_tmp"]')
 def weblist(ctx, outfile, jsonfile, tmppath, thread, deltmp):
-    # import pdb;pdb.set_trace()
     conf['del_tmp'] = deltmp if deltmp else conf['del_tmp']
     conf['etx_info_weblist_file'] = outfile if outfile else conf['etx_info_weblist_file']
     conf['data_file'] = jsonfile if jsonfile else conf['data_file']
     conf['tmp_path'] = tmppath if tmppath else conf['tmp_path']
     conf['threadnum'] = thread if thread else conf['threadnum']
     web_list_exec()
+
+
+@option_init.command('spec-fileCheck',
+        help='Check filename in web_accessible_resources is exists or not')
+@click.pass_context
+def weblist_file_check():
+    pass
+
+@option_init.command('spec-weblistAgain',
+        help='Re get weblist')
+@click.pass_context
+def weblist_again():
+    d_weblist_1000p_1st = './data/etx_weblist_info_1000p.json'
+    d_1000p_1st = './data/data2_1000.json'
+    d_all = './data/etx_info_all_2.json'
+

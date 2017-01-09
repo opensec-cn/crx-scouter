@@ -34,7 +34,6 @@ class chromeStoreSpider(object):
             while True:
                 print('[*] start : %s !!!!'%str(start))
                 url = self.ext_item_url.format(limit=self.limit, start=start, category=category)
-                # import pdb;pdb.set_trace()
                 res = self.get_ext_item_reps(url)
                 jsonlist = self._res_to_info_list(res)
                 if jsonlist:
