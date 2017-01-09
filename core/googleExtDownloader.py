@@ -94,6 +94,13 @@ def manifestfile_to_weblist(file=''):
             print(str(e))
             print('[!] ValueError when manifestfile_to_weblist in :{}'.format(file))
 
+def del_tmp_file(filepath, path, extid):
+    try:
+        if conf['del_tmp']:
+            os.remove(filepath)
+        shutil.rmtree(os.path.join(path, extid))
+    except FileNotFoundError as e:
+        print(str(e))
 
 def ext_info_add_list(extinfo = {}):
     extid = extinfo.get('id')
@@ -108,12 +115,7 @@ def ext_info_add_list(extinfo = {}):
             web_list = manifestfile_to_weblist(manifest_file)
             if web_list:
                 web_list = wildcard_char_done(etxfile=filepath, weblist=web_list)
-            try:
-                if conf['del_tmp']:
-                    os.remove(filepath)
-                shutil.rmtree(os.path.join(path, extid))
-            except FileNotFoundError as e:
-                print(str(e))
+                del_tmp_file(filepath, path, extid)
             if web_list:
                 extinfo['web_accessible_resources'] = web_list
                 print('[*] ID : {} has done, time is : {}'.format(
@@ -124,4 +126,5 @@ def ext_info_add_list(extinfo = {}):
             extinfo['filelist'] = filelist
             print('[*] ID : {} has done, time is : {}'.format(
                     extid, strftime("%Y-%m-%d %H:%M:%S", gmtime())))
+            del_tmp_file(filepath, path, extid)
             return extinfo
