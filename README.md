@@ -2,6 +2,11 @@ Chrome WebStore Extensions Knower
 
 ---
 
+# 参考：
+
+http://server.n0tr00t.com/chrome/ext_probe.html
+https://www.n0tr00t.com/2017/01/09/Chrome-Extensions-Probe.html
+
 # 安装和运行
 
 pip3 install -r requirements.txt
@@ -101,7 +106,15 @@ conf['HTTP_HEADERS'] = {
 
 ## 关于已生成的数据文件
 
+这里提供两个数据文件：
 
+1. 扩展探测中用到数据文件：[用户量1000+且带有解析后处理后的web_accessible_resources的插件信息](./data/etx_weblist_info_1k.txt)
+2. 包含所有扩展信息的数据文件: [所有拓展信息](./data/etx_info_all.txt)
+
+## Example
+
+`python3 python3 geknower.py etxDownload -O out.txt -f data/etx_info_all.txt  -p /tmp/ -d -t 20`
+`python3 geknower.py etxInfo -O out.txt -u 1000000`
 
 
 
