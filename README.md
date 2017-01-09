@@ -5,11 +5,13 @@ Chrome WebStore Extensions Knower
 # 参考：
 
 http://server.n0tr00t.com/chrome/ext_probe.html
+
 https://www.n0tr00t.com/2017/01/09/Chrome-Extensions-Probe.html
 
 # 安装和运行
 
 pip3 install -r requirements.txt
+
 python3 geknower.py
 
 # 帮助文档
