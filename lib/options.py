@@ -87,6 +87,8 @@ def check_discover(ctx):
 @option_init.command('updateWeblist',
         help='update weblist of new info')
 def update():
+    import io
+    import json
     from lib.threadManager import ThreadPool
     from lib.common import check_in_file, dict2file
     from core.googleExtDownloader import ext_info_add_list
