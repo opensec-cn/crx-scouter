@@ -130,3 +130,4 @@ def ext_info_add_list(extinfo = {}):
                     extid, strftime("%Y-%m-%d %H:%M:%S", gmtime())))
             del_tmp_file(filepath, path, extid)
             return extinfo
+        return extinfo

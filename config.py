@@ -30,7 +30,7 @@ conf['del_tmp'] = False
 conf['weblist'] = False
 
 # 是否解析crx文件添加crx解压之后生成的文件名列表
-conf['filelist'] = True
+conf['filelist'] = False
 
 # 请求的UA
 conf['HTTP_HEADERS'] = {

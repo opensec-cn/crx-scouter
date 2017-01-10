@@ -41,11 +41,17 @@ def etxinfo(ctx, outfile, users):
         help='Thread number, default use config.py:conf["threadnum"]')
 @click.option('-d', '--deltmp', is_flag=True, 
         help='del the dowload config.py:conf["del_tmp"]')
+@click.option('-wl', '--weblist', is_flag=True, 
+        help='add the web_accessible_resources from jsonfile to outfile config.py:conf["weblist"]')
+@click.option('-fl', '--filelist', is_flag=True, 
+        help='add the unzip .crx filelist from jsonfile to outfile config.py:conf["filelist"]')
 @click.option('-u', '--users', default=0, type=int,
         help='Only get the users great than the number, default 0 get all')
-def weblist(ctx, outfile, jsonfile, tmppath, thread, deltmp, users):
+def weblist(ctx, outfile, jsonfile, tmppath, thread, deltmp, users, weblist, filelist):
     conf['del_tmp'] = deltmp if deltmp else conf['del_tmp']
     conf['data_file'] = jsonfile if jsonfile else conf['data_file']
+    conf['weblist'] = weblist if weblist else conf['weblist']
+    conf['filelist'] = filelist if filelist else conf['filelist']
     conf['tmp_path'] = tmppath if tmppath else conf['tmp_path']
     conf['threadnum'] = thread if thread else conf['threadnum']
     conf['more_then_user_num'] = users if users else conf['more_then_user_num']
