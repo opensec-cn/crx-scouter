@@ -19,7 +19,7 @@ python3 geknower.py
 # 帮助文档
 
 ```
-$ python3 geknower.py --help                                                                             master [a41c206] modified untracked
+$ python3 geknower.py --help
 [*] main start
 Usage: geknower.py [OPTIONS] COMMAND [ARGS]...
 
@@ -33,7 +33,7 @@ Commands:
   spec-weblistAgain  Re get weblist
 
 
-python3 geknower.py etxDownload --outfile out.txt -f data/etx_info_all.txt -t 20 -u 10000 -p /tmp --help
+python3 geknower.py etxDownload --help
 [*] main start
 Usage: geknower.py etxDownload [OPTIONS]
 
@@ -53,7 +53,7 @@ Options:
   --help                Show this message and exit.
 
 
-$ python3 geknower.py etxInfo --help                                                                     master [a41c206] modified untracked
+$ python3 geknower.py etxInfo --help                                                                 
 [*] main start
 Usage: geknower.py etxInfo [OPTIONS]
 
