@@ -10,7 +10,7 @@ from time import strftime, gmtime
 from config import conf
 from lib.common import dict2file
 from lib.threadManager import ThreadPool
-from lib.common import Error, get_int
+from lib.common import Error, get_int, check_in_file
 from lib.common import do_ten_times_til_true, lstrip_bom, zip2filelist
 
 ext_download_url_base = 'https://clients2.google.com/service/update2/crx?' \
@@ -94,6 +94,7 @@ def manifestfile_to_weblist(file=''):
             print(str(e))
             print('[!] ValueError when manifestfile_to_weblist in :{}'.format(file))
 
+
 def del_tmp_file(filepath, path, extid):
     try:
         if conf['del_tmp']:
@@ -101,6 +102,7 @@ def del_tmp_file(filepath, path, extid):
         shutil.rmtree(os.path.join(path, extid))
     except FileNotFoundError as e:
         print(str(e))
+
 
 def ext_info_add_list(extinfo = {}):
     extid = extinfo.get('id')

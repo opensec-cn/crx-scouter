@@ -74,7 +74,7 @@ def weblist_again(ctx):
     d_all = './data/etx_info_all_2.json'
     pass
 
-@option_init.command('spec-checkDiscover',
+@option_init.command('updateInfo',
         help='check the etx infomation discover')
 @click.pass_context
 def check_discover(ctx):
@@ -83,4 +83,24 @@ def check_discover(ctx):
     for category in clist:
         csspider.get_ext_by_category(category)
     pass
+
+@option_init.command('updateWeblist',
+        help='update weblist of new info')
+def update():
+    from lib.threadManager import ThreadPool
+    from lib.common import check_in_file, dict2file
+    from core.googleExtDownloader import ext_info_add_list
+    print('[*] -- update start ---')
+    pool = ThreadPool(conf['threadnum'])
+    with io.open(conf['data_file'], 'r', encoding='utf-8') as f:
+        for count, line in enumerate(f):
+            info = json.loads(line.strip())
+            if check_in_file(info.get('id'), './data/data2_1000.json'):
+                continue
+            pool.add_task(ext_info_add_list, extinfo=info)
+    pool.destroy()
+    while not pool.out_queue.empty():
+        result = pool.get_task()
+        if result:
+            dict2file(result, conf['etx_info_weblist_file'])
 
