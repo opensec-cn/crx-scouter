@@ -29,7 +29,7 @@ def etxinfo(ctx, outfile, users):
 
 
 @option_init.command('etxDownload',
-        help='This commond will Download Chrome Etx .crx file')
+        help='Download Chrome Etx .crx file and get some infomations in it')
 @click.pass_context
 @click.option('-O', '--outfile', type=str,
         help='Output result a json file, default use config.py:conf["etx_info_weblist_file"]')
