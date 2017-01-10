@@ -40,6 +40,10 @@ def do_ten_times_til_true(func):
         return ret
     return _do_ten_times_til_true
 
+def check_in_file(stri='', file=''):
+    with open(file, 'r', encoding='utf-8') as f:
+        return (stri in f.read())
+
 def lstrip_bom(str_, bom=BOM_UTF8):
     if str_.startswith(bom):
         return str_[len(bom):]

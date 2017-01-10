@@ -62,15 +62,25 @@ def weblist(ctx, outfile, jsonfile, tmppath, thread, deltmp, users, weblist, fil
 @option_init.command('spec-fileCheck',
         help='Check filename in web_accessible_resources is exists or not')
 @click.pass_context
-def weblist_file_check():
+def weblist_file_check(ctx):
     pass
 
 @option_init.command('spec-weblistAgain',
         help='Re get weblist')
 @click.pass_context
-def weblist_again():
+def weblist_again(ctx):
     d_weblist_1000p_1st = './data/etx_weblist_info_1000p.json'
     d_1000p_1st = './data/data2_1000.json'
     d_all = './data/etx_info_all_2.json'
+    pass
+
+@option_init.command('spec-checkDiscover',
+        help='check the etx infomation discover')
+@click.pass_context
+def check_discover(ctx):
+    csspider = chromeStoreSpider()
+    clist = csspider.category_list
+    for category in clist:
+        csspider.get_ext_by_category(category)
     pass
 

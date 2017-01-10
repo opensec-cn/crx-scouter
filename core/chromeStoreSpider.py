@@ -1,5 +1,6 @@
 import json
 import requests
+from lib.common import check_in_file
 from config import conf
 from lib.common import get_int, dict2file, do_ten_times_til_true
 
@@ -39,6 +40,8 @@ class chromeStoreSpider(object):
                 if jsonlist:
                     for json in jsonlist:
                         id_str, users, info = self._list2info(json)
+                        if check_in_file(id_str, self.json_path):
+                            continue
                         if users >= conf['more_then_user_num']:
                             print('[*] id : %s'%id_str)
                             dict2file(info, path=self.json_path)
@@ -80,14 +83,16 @@ class chromeStoreSpider(object):
         except requests.RequestException as e:
             return False
 
-    def get_ext_by_google(self):
-        url = "https://chrome.google.com/webstore/ajax/item?pv=20161108&count=209&category=ext/15-by-google"
+    def get_ext_by_category(self, category):
+        url = "https://chrome.google.com/webstore/ajax/item?pv=20161108&count=209&category={}".format(category)
         res = self.get_ext_item_reps(url)
         jsonlist = json.loads(res.lstrip(")]}'\n"))
         jsonlist = jsonlist[1][1]
         if jsonlist:
             for json_ in jsonlist:
                 id_str, users, info = self._list2info(json_)
+                if check_in_file(id_str, self.json_path):
+                    return False
                 if users >= conf['more_then_user_num']:
                     print('[*] id : %s'%id_str)
                     dict2file(info, path=self.json_path)

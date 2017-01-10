@@ -9,13 +9,13 @@ conf = {}
 
 
 # 保存插件信息的文件，文件格式是每一行一个json，存储一个插件信息
-conf['data_file'] = './data/data.json'
+conf['data_file'] = './data/etx_info_all.txt'
 
 # 生成添加web_accessible_resources或者文件名列表所保存的json，这个生成会根据conf['data_file']内的插件信息进行生成
 conf['etx_info_weblist_file'] = './data/data_weblist.json'
 
 # 用户数限制，爬取数据时只爬取用户量多余该数的插件信息
-conf['more_then_user_num'] = 1000
+conf['more_then_user_num'] = 0
 
 # tmp目录，用于保存下载下来的.crx文件
 conf['tmp_path'] = './tmp/'
