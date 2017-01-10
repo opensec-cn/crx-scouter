@@ -4,6 +4,8 @@ Chrome WebStore Extensions Knower
 
 # 参考：
 
+http://blog.neargle.com/2017/01/09/chrome-ext-spider-for-probe/
+
 http://server.n0tr00t.com/chrome/ext_probe.html
 
 https://www.n0tr00t.com/2017/01/09/Chrome-Extensions-Probe.html
@@ -31,7 +33,7 @@ Commands:
   spec-weblistAgain  Re get weblist
 
 
-$ python3 geknower.py etxDownload --help                                                                 master [a41c206] modified untracked
+python3 geknower.py etxDownload --outfile out.txt -f data/etx_info_all.txt -t 20 -u 10000 -p /tmp --help
 [*] main start
 Usage: geknower.py etxDownload [OPTIONS]
 
@@ -46,6 +48,8 @@ Options:
                         use config.py:conf["tmp_path"]
   -t, --thread INTEGER  Thread number, default use config.py:conf["threadnum"]
   -d, --deltmp          del the dowload config.py:conf["del_tmp"]
+  -u, --users INTEGER   Only get the users great than the number, default 0
+                        get all
   --help                Show this message and exit.
 
 
@@ -115,8 +119,15 @@ conf['HTTP_HEADERS'] = {
 
 ## Example
 
-`python3 python3 geknower.py etxDownload -O out.txt -f data/etx_info_all.txt  -p /tmp/ -d -t 20`
+使用20线程下载所有data/etx_info_all.txt内用户量大于10000的插件crx文件到tmp目录
+
+`python3 geknower.py etxDownload --outfile out.txt -f data/etx_info_all.txt -t 20 -u 10000 -p /tmp `
+
+爬取用户量大于1000000插件信息数据
+
 `python3 geknower.py etxInfo -O out.txt -u 1000000`
 
+## Thx
 
+Evi1m0 Phithon
 

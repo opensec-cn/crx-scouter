@@ -24,7 +24,7 @@ conf['tmp_path'] = './tmp/'
 conf['threadnum'] = 20
 
 # 是否在解析之后删除下载的crx文件，如果以下载插件为目的可以不删除
-conf['del_tmp'] = True
+conf['del_tmp'] = False
 
 # 是否解析crx文件添加web_accessible_resources信息
 conf['weblist'] = False

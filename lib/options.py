@@ -41,12 +41,15 @@ def etxinfo(ctx, outfile, users):
         help='Thread number, default use config.py:conf["threadnum"]')
 @click.option('-d', '--deltmp', is_flag=True, 
         help='del the dowload config.py:conf["del_tmp"]')
-def weblist(ctx, outfile, jsonfile, tmppath, thread, deltmp):
+@click.option('-u', '--users', default=0, type=int,
+        help='Only get the users great than the number, default 0 get all')
+def weblist(ctx, outfile, jsonfile, tmppath, thread, deltmp, users):
     conf['del_tmp'] = deltmp if deltmp else conf['del_tmp']
-    conf['etx_info_weblist_file'] = outfile if outfile else conf['etx_info_weblist_file']
     conf['data_file'] = jsonfile if jsonfile else conf['data_file']
     conf['tmp_path'] = tmppath if tmppath else conf['tmp_path']
     conf['threadnum'] = thread if thread else conf['threadnum']
+    conf['more_then_user_num'] = users if users else conf['more_then_user_num']
+    conf['etx_info_weblist_file'] = outfile if outfile else conf['etx_info_weblist_file']
     web_list_exec()
 
 
@@ -63,4 +66,5 @@ def weblist_again():
     d_weblist_1000p_1st = './data/etx_weblist_info_1000p.json'
     d_1000p_1st = './data/data2_1000.json'
     d_all = './data/etx_info_all_2.json'
+    pass
 
