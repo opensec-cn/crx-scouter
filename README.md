@@ -4,11 +4,7 @@ Chrome WebStore Extensions Knower
 
 # 参考：
 
-http://blog.neargle.com/2017/01/09/chrome-ext-spider-for-probe/
-
-http://server.n0tr00t.com/chrome/ext_probe.html
-
-https://www.n0tr00t.com/2017/01/09/Chrome-Extensions-Probe.html
+http://mp.weixin.qq.com/s/HHPxGTk55oEw0Pj4TRg6FA
 
 # 安装和运行
 
