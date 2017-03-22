@@ -11,12 +11,20 @@ def tmp_dir_check():
 
 @click.group()
 @click.pass_context
-def option_init(ctx):
-    pass
+@click.option('-H', '--helps/--no-helps', default=False,
+        help='show long helps!!')
+def option_init(ctx, helps):
+    if helps:
+        print(ctx.get_help())
+        subcommands = ctx.command.commands
+        for subc in subcommands:
+            print("\n\nsubcommand: {}".format(subc))
+            print(subcommands.get(subc).get_help(ctx))
+        exit(1)
 
 
 @option_init.command('etxInfo', help='Crawl and update Chrome Etx infomation')
-@click.pass_obj
+@click.pass_context
 @click.option('-O', '--outfile', default='', type=str,
         help='Output result a json file, default use config.py:conf["data_file"]')
 @click.option('-u', '--users', default=0, type=int,
@@ -59,50 +67,50 @@ def weblist(ctx, outfile, jsonfile, tmppath, thread, deltmp, users, weblist, fil
     web_list_exec()
 
 
-@option_init.command('spec-fileCheck',
-        help='Check filename in web_accessible_resources is exists or not')
-@click.pass_context
-def weblist_file_check(ctx):
-    pass
+# @option_init.command('spec-fileCheck',
+#         help='Check filename in web_accessible_resources is exists or not')
+# @click.pass_context
+# def weblist_file_check(ctx):
+#     pass
 
-@option_init.command('spec-weblistAgain',
-        help='Re get weblist')
-@click.pass_context
-def weblist_again(ctx):
-    d_weblist_1000p_1st = './data/etx_weblist_info_1000p.json'
-    d_1000p_1st = './data/data2_1000.json'
-    d_all = './data/etx_info_all_2.json'
-    pass
+# @option_init.command('spec-weblistAgain',
+#         help='Re get weblist')
+# @click.pass_context
+# def weblist_again(ctx):
+#     d_weblist_1000p_1st = './data/etx_weblist_info_1000p.json'
+#     d_1000p_1st = './data/data2_1000.json'
+#     d_all = './data/etx_info_all_2.json'
+#     pass
 
-@option_init.command('updateInfo',
-        help='check the etx infomation discover')
-@click.pass_context
-def check_discover(ctx):
-    csspider = chromeStoreSpider()
-    clist = csspider.category_list
-    for category in clist:
-        csspider.get_ext_by_category(category)
-    pass
+# @option_init.command('updateInfo',
+#         help='check the etx infomation discover')
+# @click.pass_context
+# def check_discover(ctx):
+#     csspider = chromeStoreSpider()
+#     clist = csspider.category_list
+#     for category in clist:
+#         csspider.get_ext_by_category(category)
+#     pass
 
-@option_init.command('updateWeblist',
-        help='update weblist of new info')
-def update():
-    import io
-    import json
-    from lib.threadManager import ThreadPool
-    from lib.common import check_in_file, dict2file
-    from core.googleExtDownloader import ext_info_add_list
-    print('[*] -- update start ---')
-    pool = ThreadPool(conf['threadnum'])
-    with io.open(conf['data_file'], 'r', encoding='utf-8') as f:
-        for count, line in enumerate(f):
-            info = json.loads(line.strip())
-            if check_in_file(info.get('id'), './data/data2_1000.json'):
-                continue
-            pool.add_task(ext_info_add_list, extinfo=info)
-    pool.destroy()
-    while not pool.out_queue.empty():
-        result = pool.get_task()
-        if result:
-            dict2file(result, conf['etx_info_weblist_file'])
+# @option_init.command('updateWeblist',
+#         help='update weblist of new info')
+# def update():
+#     import io
+#     import json
+#     from lib.threadManager import ThreadPool
+#     from lib.common import check_in_file, dict2file
+#     from core.googleExtDownloader import ext_info_add_list
+#     print('[*] -- update start ---')
+#     pool = ThreadPool(conf['threadnum'])
+#     with io.open(conf['data_file'], 'r', encoding='utf-8') as f:
+#         for count, line in enumerate(f):
+#             info = json.loads(line.strip())
+#             if check_in_file(info.get('id'), './data/data2_1000.json'):
+#                 continue
+#             pool.add_task(ext_info_add_list, extinfo=info)
+#     pool.destroy()
+#     while not pool.out_queue.empty():
+#         result = pool.get_task()
+#         if result:
+#             dict2file(result, conf['etx_info_weblist_file'])
 
