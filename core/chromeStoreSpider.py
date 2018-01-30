@@ -13,7 +13,9 @@ class chromeStoreSpider(object):
         super(chromeStoreSpider, self).__init__()
         self.limit = 200
         self.start = 1
+        # ext/15-by-google
         self.category_list = [
+            # 'ext/15-by-google',
             'ext/10-blogging',
             'ext/12-shopping',
             'ext/11-web-development',

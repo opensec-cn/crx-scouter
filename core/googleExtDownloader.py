@@ -53,6 +53,26 @@ def web_list_exec():
             dict2file(result, conf['etx_info_weblist_file'])
 
 
+def exec_data_list(data_list):
+    print('[*] -- web list exec ---')
+    pool = ThreadPool(conf['threadnum'])
+    for info in data_list:
+        pool.add_task(ext_info_add_list, extinfo=info)
+    print('[-] all task add to threads queue : {}'.format(
+        strftime("%Y-%m-%d %H:%M:%S", gmtime())))
+    pool.destroy()
+    print('[-] thread pool has been destroy: {}'.format(
+        strftime("%Y-%m-%d %H:%M:%S", gmtime())))
+    num = 0
+    while not pool.out_queue.empty():
+        num = num + 1
+        print('[-] NO.{},get task in : {}'.format(
+            num, strftime("%Y-%m-%d %H:%M:%S", gmtime())))
+        result = pool.get_task()
+        if result:
+            dict2file(result, conf['etx_info_weblist_file'])
+
+
 def wildcard_char_done(etxfile='', weblist=[]):
     wildcard_filename_list = is_wildcard_char(weblist)
     filenamelist = zip2filelist(etxfile)
