@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+    <link href="https://cdn.bootcss.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
+    <title>下载chrome扩展文件</title>
+</head>
+<body>
+    <div class="container">
+        <input type="text" class="form-control" id="url">
+        <a id="result" href=""></a>
+        <button type="button" class="btn btn-primary btn-lg btn-block" onclick="create_url()">生成下载链接</button>
+    </div>
+</body>
+<script>
+    create_url = function(){
+        url = $('input#url').val();
+        download = 'https://clients2.google.com/service/update2/crx?response=redirect&prodversion=49.0&x=id%3D'+ url +'%26installsource%3Dondemand%26uc';
+        $('a#result').attr('href', download).text(download);
+    }
+</script>
+</html>
