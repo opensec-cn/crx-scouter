@@ -6,6 +6,8 @@ from codecs import BOM_UTF8
 from collections import OrderedDict
 
 def get_int(stri = ''):
+    if isinstance(stri, int):
+        return stri
     stri = stri.strip('+')
     locale.setlocale( locale.LC_ALL, 'en_US.UTF-8' )
     return locale.atoi(stri)
