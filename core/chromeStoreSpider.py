@@ -7,7 +7,7 @@ from lib.common import get_int, dict2file, do_ten_times_til_true
 class chromeStoreSpider(object):
     """获取Chrome WebStore中所有的拓展信息"""
 
-    ext_item_url = '''https://chrome.google.com/webstore/ajax/item?hl=zh-CN&gl=CN&pv=20161108&mce=atf%2Ceed%2Cpii%2Crtr%2Crlb%2Cgtc%2Chcn%2Csvp%2Cwtd%2Cc3d%2Cncr%2Cctm%2Cac%2Chot%2Ceuf%2Cmac%2Cfcf%2Crma%2Cpot%2Cevt%2Cigb&requestedCounts=infiniteWall%3A{limit}%3A0%3Afalse&token=featured%3A0%4010316222%3A7%3Afalse%2Cmcol%23top_picks_productivity%3A0%4010316223%3A11%3Atrue%2CinfiniteWall%3A0%4010316253%3A{start}%3Afalse&category={category}&_reqid=3058318&rt=j'''
+    ext_item_url = '''https://chrome.google.com/webstore/ajax/item?hl=zh-CN&gl=US&pv=20170811&mce=atf%2Cpii%2Crtr%2Crlb%2Cgtc%2Chcn%2Csvp%2Cwtd%2Cnrp%2Chap%2Cnma%2Cc3d%2Cncr%2Cctm%2Cac%2Chot%2Ceuf%2Cmac%2Cfcf%2Crma%2Cpot%2Cevt%2Cigb&requestedCounts=infiniteWall%3A{limit}%3A0%3Afalse&token=featured%3A0%40687863%3A7%3Afalse%2Cmcol%23top_picks_web-development%3A0%40687864%3A11%3Atrue%2CinfiniteWall%3A0%40687867%3A{start}%3Afalse&category={category}&_reqid=9542155&rt=j'''
 
     def __init__(self):
         super(chromeStoreSpider, self).__init__()
