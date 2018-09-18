@@ -1,10 +1,11 @@
-Chrome WebStore Extensions Knower
+# Chrome WebStore Extensions Knower
 
 ---
 
 # 参考：
 
-http://mp.weixin.qq.com/s/HHPxGTk55oEw0Pj4TRg6FA
+- http://mp.weixin.qq.com/s/HHPxGTk55oEw0Pj4TRg6FA
+- http://blog.neargle.com/ChromeExtensionKnower/
 
 # 安装和运行
 
