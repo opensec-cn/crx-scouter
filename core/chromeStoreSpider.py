@@ -9,23 +9,7 @@ class chromeStoreSpider(object):
 
     ext_item_url = '''https://chrome.google.com/webstore/ajax/item?hl=zh-CN&gl=HK&pv=20181009&mce=atf%2Cpii%2Crtr%2Crlb%2Cgtc%2Chcn%2Csvp%2Cwtd%2Chap%2Cnma%2Cdpb%2Cc3d%2Cncr%2Cctm%2Cac%2Chot%2Cmac%2Cfcf%2Crma%2Cigb%2Cpot%2Cevt&requestedCounts=infiniteWall%3A{limit}%3A0%3Afalse&token=featured%3A0%406147801%3A7%3Afalse%2Cmcol%23top_picks_shopping%3A0%406147802%3A11%3Atrue%2CinfiniteWall%3A0%406147803%3A{start}%3Afalse&category={category}&_reqid=1241631&rt=j'''
 
-    header = {
-        "Host": "chrome.google.com",
-        "Connection": "close",
-        "Content-Length": "79",
-        "Sec-Fetch-Mode": "cors",
-        "X-Same-Domain": "1",
-        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/76.0.3809.100 Safari/537.36",
-        "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8",
-        "Accept": "*/*",
-        "Origin": "https://chrome.google.com",
-        "X-Client-Data": "CIS2yQEIo7bJAQjBtskBCKmdygEIqKPKAQjiqMoBCPiqygEIl63KAQjNrcoBCMqvygE=",
-        "Sec-Fetch-Site": "same-origin",
-        "Referer": "https://chrome.google.com/",
-        "Accept-Encoding": "gzip, deflate",
-        "Accept-Language": "zh-CN,zh;q=0.9,en;q=0.8",
-        "Cookie": "SID=RwdAO75DhQ6ZHVR8cf0qQxl0oZPYTERvCGzG6Fu_myUDo2ehQpLx1nFPgc649Z2HCLuwdw.; HSID=AFhgbhfFahzD9vIij; SSID=A5saWX5ZgP_zaPe9D"
-    }
+    cookie = {"SID": "RwdAO75DhQ6ZHVR8cf0qQxl0oZPYTERvCGzG6Fu_myUDo2ehQpLx1nFPgc649Z2HCLuwdw.", "HSID":"AFhgbhfFahzD9vIij", "SSID":"A5saWX5ZgP_zaPe9D"}
 
     data = {"login": "b2108870@gmail.com", "t": "AHUv8HF_dpO7T1_0hexpGfEoXvqN_d25tQ:1565494460356"}
     
@@ -95,7 +79,8 @@ class chromeStoreSpider(object):
     def get_ext_item_reps(self, url):
         # 尝试请求十次防止请求失败，数据丢失。
         try:
-            response = requests.post(url, data=self.data, headers=self.header, timeout=10)
+            response = requests.post(url, verify=False,\
+                    allow_redirects=False, timeout=10, headers=conf['HTTP_HEADERS'], data=self.data, cookies=self.cookie)
             res = response.text
             if response.status_code != 200:
                 raise requests.RequestException(u"Status code error: {}".format(response.status_code))
