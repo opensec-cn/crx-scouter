@@ -1,6 +1,11 @@
 
 import { fparray } from './fp-1-realfile-all-ext'
 
+// TODO better import
+// (!) Some chunks are larger than 500 KiB after minification. Consider:
+// - Using dynamic import() to code-split the application
+// - Use build.rollupOptions.output.manualChunks to improve chunking: https://rollupjs.org/guide/en/#outputmanualchunks
+// - Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
 
 export const check_all_crx = async (alive_callback) => {
 
