@@ -6,10 +6,8 @@
     "build": "vite build",
     "serve": "vite preview"
   },
+  "homepage": "./",
   "devDependencies": {
     "vite": "^2.5.1"
-  },
-  "dependencies": {
-    "jquery": "^3.6.0"
   }
 }
