@@ -4,7 +4,7 @@ set -x
 exec > >(tee -i /tmp/deploy.log)
 exec 2>&1
 
-npm run build
+node ./node_modules/vite/bin/vite.js build --base=./
 # cp "dist/" "/tmp/dist/"
 
 msg=`git log --oneline | head -n 1`
