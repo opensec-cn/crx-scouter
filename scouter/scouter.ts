@@ -1,6 +1,7 @@
 
 import { fparray } from './fp-1-realfile-all-ext'
 
+
 export const check_all_crx = async (alive_callback) => {
 
     for (let index = 0; index < fparray.length; index++) {
@@ -18,6 +19,15 @@ export const check_all_crx = async (alive_callback) => {
     }
 }
 
+
+// sample of crx data: 
+// {
+//     "extid": "aapbdbdomjkkjkaonfhkkikfgjllcleb",
+//     "real_access_files": [
+//       "options.html"
+//     ],
+//     "url": "https://chrome.google.com/webstore/detail/google-translate/aapbdbdomjkkjkaonfhkkikfgjllcleb"
+// }
 export const check_one = async (crxid, alive_callback) => {
 
     for (let index = 0; index < fparray.length; index++) {
@@ -38,7 +48,7 @@ export const check_one = async (crxid, alive_callback) => {
         if (flag) {
             // TODO: we need the extension name too.
             alive_callback(fingerprint)
-        }
+        } 
 
         return
 
@@ -70,6 +80,8 @@ const check_crx_alive = async (url): Promise<boolean> =>  {
                 resolve(true)
             }
         };
+
+        xhr.onreadystatechange = function() {}
 
         xhr.onerror = function() {
             // ingnore error
