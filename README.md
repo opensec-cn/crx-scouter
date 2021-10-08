@@ -3,6 +3,10 @@
 > ⚠️ 这个分支是 Chrome 扩展爬虫的代码。  
 > **爬虫已经在2021年重构为 Golang。目前仍旧在整理中，近期会开源爬虫的 Golang 代码。**
 
+[http://blog.neargle.com/crx-scouter/](http://blog.neargle.com/crx-scouter/)
+
+---
+
 ***注：这个是之前发布在 n0tr00t 上的报告/博客原文，由于 n0tr00t 的师傅们已不再运营，故在此备份，工具和数据的说明请跳转到[参考之后](#参考)。（部分删改）***
 
 ![](http://mmbiz.qpic.cn/mmbiz_png/PAV8ewtdsKo4nQzgLy4icPNkrSgCzFAztkOpFYW2P39iba61wcVqWBtd3nDKd5Qxje22n8o8RL0YtEoH8E6qWqfg/0?wx_fmt=gif)
