@@ -1,6 +1,9 @@
 #!/bin/bash
 
 set -x
+set -u
+set -e
+
 exec > >(tee -i /tmp/deploy.log)
 exec 2>&1
 
@@ -10,6 +13,10 @@ node ./node_modules/vite/bin/vite.js build --base=./
 msg=`git log --oneline | head -n 1`
 
 git checkout gh-pages
+
+ls -l ./assets
+rm -r ./assets
+
 mv dist/* .
 
 git add index.html assets/*
