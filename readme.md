@@ -1,11 +1,13 @@
 
 # 点我的链接我就能知道你用了哪些 chrome 插件
 
-<img src="./img/favicon.svg.png" height="200px" /><img src="./img/title.png" height="200px" />
+<h2><a href="https://blog.neargle.com/crx-scouter/" rel="nofollow" target="_blank"><img src="./img/favicon.svg.png" height="200px" /><img src="./img/title.png" height="200px" /></a></h2>
+
+在线 DEMO: [https://blog.neargle.com/crx-scouter/](https://blog.neargle.com/crx-scouter/)
+
+---
 
 ***注：这个是之前发布在 n0tr00t 上的报告/博客原文，由于 n0tr00t 的师傅们已不再运营，故在此备份，工具和数据的说明请跳转到[参考之后](#参考)。（部分删改）***
-
-![](http://mmbiz.qpic.cn/mmbiz_png/PAV8ewtdsKo4nQzgLy4icPNkrSgCzFAztkOpFYW2P39iba61wcVqWBtd3nDKd5Qxje22n8o8RL0YtEoH8E6qWqfg/0?wx_fmt=gif)
 
 咳咳，我知道干货一般阅读量会比较低，所以我借用了安全圈段子讲的最好的人惯用的漏洞标题风格。  
 
