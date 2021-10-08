@@ -25,6 +25,20 @@ export const check_all_crx = async (alive_callback) => {
 }
 
 
+export const navigator_plugins = () => {
+    const plugins = []
+    for (let index = 0; index < navigator.plugins.length; index++) {
+        const plugin = navigator.plugins[index];
+        plugins.push({
+            "extid": plugin.filename,
+            "url": "https://developer.mozilla.org/en-US/docs/Web/API/Navigator/plugins",
+            "name": plugin.name,
+        })
+    }
+    return plugins
+}
+
+
 // sample of crx data: 
 // {
 //     "extid": "aapbdbdomjkkjkaonfhkkikfgjllcleb",
