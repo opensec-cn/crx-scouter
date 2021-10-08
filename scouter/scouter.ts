@@ -112,3 +112,6 @@ const check_crx_alive = async (url): Promise<boolean> =>  {
 const check_crx_alive_ = (url, callback) => {
 
 }
+
+// window.check_one = check_one;
+// window.check_all_crx = check_all_crx;
