@@ -1,7 +1,4 @@
-
-<h2><a href="https://blog.neargle.com/crx-scouter/" rel="nofollow" target="_blank"><img src="./img/favicon.svg.png" height="200px" /><img src="./img/title.png" height="200px" /></a></h2>
-
-在线 DEMO: [https://blog.neargle.com/crx-scouter/](https://blog.neargle.com/crx-scouter/)
+在线检测地址: [https://blog.neargle.com/crx-scouter/](https://blog.neargle.com/crx-scouter/)
 
 ---
 
