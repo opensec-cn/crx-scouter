@@ -14,12 +14,7 @@
 
 编写过 Chrome 扩展的开发人员都应该清楚在 crx 后缀的包中， manifest.json 配置清单文件提供了这个扩展的重要信息，crx 后缀文件可以直接使用 unzip 解压，Windows 下的安装后解压的路径在：C:\Users\Administrator\AppData\Local\Google\Chrome\User Data\Default\Extensions ，MacOS 在：cd ~/Library/Application\ Support/Google/Chrome/Default/Extensions ，其中 manifest.json 的样例：
 
-```
-  ➜  0.7.0_0 cat manifest.json
-
-```
-
-```
+```json
 {
   "background": {
     "scripts": [ "background.js" ]
@@ -54,36 +49,29 @@
 
 #### **0x02 Manifest**
 
-*   2.0 中关于 CSP 的强制应用，要求开发者配置 content_security_policy ，如果未设置的话则使用 Chrome 的默认 manifest csp 规则；
-    
-*   不同于老版本的规则，crx 下的资源文件不再是默认可用（直接访问）的图像、资源、脚本。如果想让网站能够加载其资源就必须配置 web_accessible_resources 清单；
-    
-*   删除 chrome.self API ，使用 chrome.extension 替代；
-    
-*   …
-    
+* 2.0 中关于 CSP 的强制应用，要求开发者配置 content_security_policy ，如果未设置的话则使用 Chrome 的默认 manifest csp 规则；
+* 不同于老版本的规则，crx 下的资源文件不再是默认可用（直接访问）的图像、资源、脚本。如果想让网站能够加载其资源就必须配置 web_accessible_resources 清单；
+* 删除 chrome.self API ，使用 chrome.extension 替代；
+* ...
 
 #### **0x03 script <–> onload / onerror**
 
 在多年前的 ChromeExtensions 探测中我们可以直接探测静态资源文件来判断是否存在，在上面的更新变动中可以看到，如果访问资源则必须在 web_accessible_resources 中声明 LIST （可以使用通配符），拿 json-view 举例：
 
-```
+```json
 "web_accessible_resources": [ "assets/options.html", "assets/csseditor.html", "assets/css/jsonview.css", "assets/css/jsonview-core.css", "assets/css/content_error.css", "assets/images/options.png", "assets/images/close_icon.gif", "assets/images/error.gif" ]
-
 ```
 
 访问他们资源的 URL 格式如下：
 
-```
+```js
 'chrome-extension://' + id + web_accessible_resources
-
 ```
 
 在测试的过程中我们发现大量的扩展禁止了 iframe 内嵌访问，这里我们可以使用 script 加载页面的差异化来判断是否存在文件：
 
-```
+```html
 <script src="chrome-extension://aimiinbnnkboelefkjlenlgimcabobli/assets/options.html" onload="alert('json-view!')" onerror="alert(':(')"></script>
-
 ```
 
 ![](http://mmbiz.qpic.cn/mmbiz_jpg/PAV8ewtdsKo4nQzgLy4icPNkrSgCzFAztNOzgMRxVcoLqPicUkf1RHcNehV0vwCcBwFRRhiceje8lC8rzdmgeDH5w/0?wx_fmt=jpeg)
@@ -92,7 +80,7 @@
 
 我们编写了爬虫获取整个[谷歌商店](https://chrome.google.com/webstore/category/extensions?hl=en-US)中的扩展应用（id, name, starts, users, category, url），分类如下：
 
-```
+```python
   'ext/10-blogging',
   'ext/15-by-google',
   'ext/12-shopping',
@@ -105,12 +93,11 @@
   'ext/6-news',
   'ext/14-fun',
   'ext/28-photos'
-
 ```
 
 截至 2017 年初 谷歌商店扩展应用总数量为 42658 ，我们将这些 crx 全部进行下载分析其 manifest.json 的编写规则，**发现 12032 个扩展可以探测**，**在之后的实际测试过程中也发现探测应用的成功率为 1/3 ~ 1/4** ，比较客观，保存的 JSON 格式如下：
 
-```
+```json
 {
   "web_accessible_resources": [
     "19.png",
@@ -132,19 +119,13 @@
 {
 "web_accessible_resources": ["js/move.js"], "name": "Postagens Megafilmes 2.1", "stars": 0, "id": "ekennogbnkdbgejohplipgcneekoaanp", "url": "https://chrome.google.com/webstore/detail/postagens-megafilmes-21/ekennogbnkdbgejohplipgcneekoaanp", "category": "ext/10-blogging", "users": "2,408"
 },
-
-```
-
-```
-...
-
 ```
 
 #### **0x05 ProbeJS**
 
 通过编写脚本可以加载并探测本地扩展是否存在，虽然需要触发大量的请求来探测，但由于是访问本地资源其速度仍然可以接受，我们过滤出 **users 1000 以上的扩展**来进行筛选探测（ testing 函数动态创建并删除不成功的 dom 探测节点）：
 
-```
+```js
 $.get("ext1000up.json" + "?_=" + new Date().valueOf(), function(ext){
     for (let n in ext.data) {
         var id = ext.data[n].id;
@@ -155,12 +136,6 @@ $.get("ext1000up.json" + "?_=" + new Date().valueOf(), function(ext){
     }
     $('#loading').remove();
 })
-
-```
-
-```
-...
-
 ```
 
 ![](http://mmbiz.qpic.cn/mmbiz_jpg/PAV8ewtdsKo4nQzgLy4icPNkrSgCzFAzt4LaMPolcFsz8xmg2NuymAf8nkibuwClDibc9dEkuzKeqHt6eOruZMUww/0?wx_fmt=jpeg)
