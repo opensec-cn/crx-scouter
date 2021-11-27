@@ -9,6 +9,28 @@
     - 📚 <a class="title-link" href="https://github.com/neargle/crx-scouter/tree/master" rel="nofollow" target="_blank"> Crawler Source Code </a>
     - 🆕 <a class="title-link" href="https://github.com/neargle/crx-scouter/issues/new?assignees=&labels=&template=bug-report.md" rel="nofollow" target="_blank">Request A New Fingerprint </a>
 
+## HOW TO USE
+
+crx-scouter.js 支持只检测单个插件，只需传入插件ID和回调函数如下：
+
+```javascript
+const { check_one } = await import('./scouter/scouter')
+check_one("aapbdbdomjkkjkaonfhkkikfgjllcleb", console.log)
+```
+
+`console.log` 回调输出下列信息则表示当前浏览器使用了 Google Translate 插件。
+```json
+{
+    "extid": "aapbdbdomjkkjkaonfhkkikfgjllcleb",
+    "url": "https://chrome.google.com/webstore/detail/google-translate/aapbdbdomjkkjkaonfhkkikfgjllcleb",
+    "name": "Google Translate"
+}
+```
+
+当然也有支持检测指纹中的所有插件的函数 `check_all_crx(callback)`， [✨ 在线检测地址](https://blog.neargle.com/crx-scouter/) 就基于这个函数，效果图如下：
+
+![效果图](img/awesome-test.png)
+
 ## [检测原理] 点我的链接我就能知道你用了哪些 chrome 插件
 
 注⚠️：这个是2016年发布在 n0tr00t 上的报告/博客原文，由于 n0tr00t 的师傅们已不再运营，故在此备份，工具和数据的说明请跳转到[参考之后](#参考)。
