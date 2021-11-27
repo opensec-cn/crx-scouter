@@ -10,6 +10,8 @@ exec 2>&1
 node ./node_modules/vite/bin/vite.js build --base=./
 # cp "dist/" "/tmp/dist/"
 
+cp dist/assets/scouter.*.js release/scouter.js
+
 msg=`git log --oneline | head -n 1`
 
 git checkout gh-pages
