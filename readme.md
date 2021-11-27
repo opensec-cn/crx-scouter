@@ -1,10 +1,14 @@
-在线检测地址: [https://blog.neargle.com/crx-scouter/](https://blog.neargle.com/crx-scouter/)
 
----
+<p align="center"><a href="https://github.com/neargle/crx-scouter" target="_blank" rel="noopener noreferrer"><img height="100" src="img/favicon.svg.png" alt="Vue logo"><img height="100" src="img/title.png" alt="Vue logo"></a></p>
 
-# 点我的链接我就能知道你用了哪些 chrome 插件
+📚 检测原理可参考我们2016年的文章，他有一个符合乌云时代的名字: [《点我的链接我就能知道你用了哪些 chrome 插件》](https://github.com/neargle/crx-scouter#%E7%82%B9%E6%88%91%E7%9A%84%E9%93%BE%E6%8E%A5%E6%88%91%E5%B0%B1%E8%83%BD%E7%9F%A5%E9%81%93%E4%BD%A0%E7%94%A8%E4%BA%86%E5%93%AA%E4%BA%9B-chrome-%E6%8F%92%E4%BB%B6)
 
-***注：这个是2016年发布在 n0tr00t 上的报告/博客原文，由于 n0tr00t 的师傅们已不再运营，故在此备份，工具和数据的说明请跳转到[参考之后](#参考)。（部分删改）***
+✨ |・ω・｀) 在线检测地址: [https://blog.neargle.com/crx-scouter/](https://blog.neargle.com/crx-scouter/)
+
+
+## [检测原理] 点我的链接我就能知道你用了哪些 chrome 插件
+
+***注⚠️：这个是2016年发布在 n0tr00t 上的报告/博客原文，由于 n0tr00t 的师傅们已不再运营，故在此备份，工具和数据的说明请跳转到[参考之后](#参考)。（部分删改）***
 
 咳咳，我知道干货一般阅读量会比较低，所以我借用了安全圈段子讲的最好的人惯用的漏洞标题风格。  
 
@@ -140,17 +144,17 @@ $.get("ext1000up.json" + "?_=" + new Date().valueOf(), function(ext){
 
 ![](http://mmbiz.qpic.cn/mmbiz_jpg/PAV8ewtdsKo4nQzgLy4icPNkrSgCzFAzt4LaMPolcFsz8xmg2NuymAf8nkibuwClDibc9dEkuzKeqHt6eOruZMUww/0?wx_fmt=jpeg)
 
-# 参考
+## 参考
 
 - http://blog.neargle.com/ChromeExtensionKnower/
 
-# 安装和运行
+## 安装和运行
 
 pip3 install -r requirements.txt
 
 python3 geknower.py
 
-# 帮助文档
+## 帮助文档
 
 ```
 $ python3 geknower.py --help
@@ -205,7 +209,7 @@ Options:
 
 有几个配置的选项可以在命令行中指定，可以修改config.py修改成自己想要的配置。
 
-## 关于config
+### 关于config
 
 ```python
 conf = {}
