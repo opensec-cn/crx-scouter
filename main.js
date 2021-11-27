@@ -2,7 +2,6 @@ import './style.css'
 
 const demo = async () => {
 
-    // import {check_all_crx, check_one} from './scouter/scouter'
     const { check_all_crx, navigator_plugins } = await import('./scouter/scouter')
     
     const append_text = (crx_info, element_id) => {
