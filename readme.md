@@ -1,10 +1,13 @@
 
 <p align="center"><a href="https://github.com/neargle/crx-scouter" target="_blank" rel="noopener noreferrer"><img height="100" src="img/favicon.svg.png" alt="Vue logo"><img height="100" src="img/title.png" alt="Vue logo"></a></p>
 
-📚 检测原理可参考我们2016年的文章，他有一个符合乌云时代的名字: [《点我的链接我就能知道你用了哪些 chrome 插件》](https://github.com/neargle/crx-scouter#%E7%82%B9%E6%88%91%E7%9A%84%E9%93%BE%E6%8E%A5%E6%88%91%E5%B0%B1%E8%83%BD%E7%9F%A5%E9%81%93%E4%BD%A0%E7%94%A8%E4%BA%86%E5%93%AA%E4%BA%9B-chrome-%E6%8F%92%E4%BB%B6)
+关于 crx-scouter.js:
 
-✨ |・ω・｀) 在线检测地址: [https://blog.neargle.com/crx-scouter/](https://blog.neargle.com/crx-scouter/)
-
+* 📚 检测原理可参考我们2016年的文章，他有一个符合乌云时代的名字: [《点我的链接我就能知道你用了哪些 chrome 插件》](https://github.com/neargle/crx-scouter#%E7%82%B9%E6%88%91%E7%9A%84%E9%93%BE%E6%8E%A5%E6%88%91%E5%B0%B1%E8%83%BD%E7%9F%A5%E9%81%93%E4%BD%A0%E7%94%A8%E4%BA%86%E5%93%AA%E4%BA%9B-chrome-%E6%8F%92%E4%BB%B6)
+* ✨ |・ω・｀) 在线检测地址: [https://blog.neargle.com/crx-scouter/](https://blog.neargle.com/crx-scouter/)
+* 一些指引
+    - 📚 <a class="title-link" href="https://github.com/neargle/crx-scouter/tree/master" rel="nofollow" target="_blank"> Crawler Source Code </a>
+    - 🆕 <a class="title-link" href="https://github.com/neargle/crx-scouter/issues/new?assignees=&labels=&template=bug-report.md" rel="nofollow" target="_blank">Request A New Fingerprint </a>
 
 ## [检测原理] 点我的链接我就能知道你用了哪些 chrome 插件
 
