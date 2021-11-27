@@ -1,7 +1,7 @@
 
 <p align="center"><a href="https://github.com/neargle/crx-scouter" target="_blank" rel="noopener noreferrer"><img height="100" src="img/favicon.svg.png" alt="Vue logo"><img height="100" src="img/title.png" alt="Vue logo"></a></p>
 
-关于 crx-scouter.js:
+crx-scouter.js 基于前端指纹可以探测到我们正在使用哪些 Chrome 插件(扩展)，可以检测电脑那端的人是帅气的大黑客还是高端的程序员🐱:
 
 * 📚 检测原理可参考我们2016年的文章，他有一个符合乌云时代的名字: [《点我的链接我就能知道你用了哪些 chrome 插件》](https://github.com/neargle/crx-scouter#%E7%82%B9%E6%88%91%E7%9A%84%E9%93%BE%E6%8E%A5%E6%88%91%E5%B0%B1%E8%83%BD%E7%9F%A5%E9%81%93%E4%BD%A0%E7%94%A8%E4%BA%86%E5%93%AA%E4%BA%9B-chrome-%E6%8F%92%E4%BB%B6)
 * ✨ |・ω・｀) 在线检测地址: [https://blog.neargle.com/crx-scouter/](https://blog.neargle.com/crx-scouter/)
