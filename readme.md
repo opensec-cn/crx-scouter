@@ -1,6 +1,8 @@
 
 <p align="center"><a href="https://github.com/neargle/crx-scouter" target="_blank" rel="noopener noreferrer"><img height="100" src="img/favicon.svg.png" alt="Vue logo"><img height="100" src="img/title.png" alt="Vue logo"></a></p>
 
+[[中文文档](./readme-cn.md)]
+
 **crx-scouter.js** can detect which Chrome extensions we are using quietly, and can detect whether the person before the browser is a awesome hacker or a high-end programmer 🐱, It can be used for honeypots, human-machine identification, countermeasures of ad blocking, pre-checks for extension exploits, and so on.
 
 The principle of crx-scouter.js is based on an experiment I did with evi1m0 in 2017. Google seems to want to solve this problem, but with little success. Details can be found in [the principle document](#WHY).
