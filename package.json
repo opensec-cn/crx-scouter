@@ -8,6 +8,6 @@
   },
   "homepage": "./",
   "devDependencies": {
-    "vite": "^2.5.1"
+    "vite": "^2.9.13"
   }
 }
